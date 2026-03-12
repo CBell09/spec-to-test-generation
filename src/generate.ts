@@ -46,7 +46,8 @@ Rules:
 - Use descriptive test names that map to acceptance criteria
 - Include positive and negative test cases
 - Do not wrap the JSON in markdown code blocks
-- testCode should be a single string with \\n for newlines`,
+- testCode should be a single string with \\n for newlines
+- The target application is https://the-internet.herokuapp.com. All page.goto() calls must use relative paths (e.g. '/login'). Use selectors and credential values that match the real HTML of that site exactly.`,
     messages: [
       {
         role: "user",
@@ -55,8 +56,9 @@ Rules:
     ],
   });
 
+  const firstBlock = message.content[0];
   const responseText =
-    message.content[0].type === "text" ? message.content[0].text : "";
+    firstBlock?.type === "text" ? firstBlock.text : "";
 
   let result: TestGenerationResult;
   try {
